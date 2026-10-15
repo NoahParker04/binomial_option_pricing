@@ -78,3 +78,32 @@ def binary_put_payoff(S, K):
     K = strike price (float)
     """
     return np.where(S <= K, 1.0, 0.0)
+
+
+def option_price(S0, K, u, d, r, N, payoff):
+    """
+    This function prices a path-dependent option using the N-period binomial model.
+    
+    This function uses backward induction to find C_0:
+
+    Start from the payoffs at maturity, C_N = f(S_N), then step back one period at a time. 
+    On the tree, k up-moves at time n moves to k+1 up-moves at time n+1 after an up-move (H) and stays on k up-moves after a down-move (T), so
+
+    C_n[k] = (q * C_{n+1}[k+1] + (1 - q) * C_{n+1}[k]) / (1 + r)
+
+    Parameters:
+    S0 = initial stock price (float)
+    K = strike price (float)
+    u = up factor per period (float)
+    d = down factor per period (float)
+    r = risk-free interest rate per period (float)
+    N = number of periods (int)
+    payoff = function f(S, K) giving payoffs at maturity, choose 1 input from call_payoff, put_payoff, binary_call_payoff, binary_put_payoff
+    """
+    q = risk_neutral_prob(u, d, r)
+    V = payoff(maturity_prices(S0, u, d, N), K)
+    for _ in range(N):
+        up = V[1:]  # copy of V without its first entry
+        down = V[:-1] # copy of V without its last entry
+        V = (q * up + (1 - q) * down) / (1 + r)
+    return V[0]
