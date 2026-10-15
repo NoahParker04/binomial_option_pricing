@@ -3,6 +3,7 @@ Module for path-independent option pricing using the N-period binomial model
 """
 import numpy as np
 
+
 def risk_neutral_prob(u, d, r):
     """
     Function returns the risk-neutral probability q = (1 + r - d) / (u - d)
@@ -18,6 +19,7 @@ def risk_neutral_prob(u, d, r):
     if not (d < 1 + r < u):
         raise ValueError("inputs u,d,r must satisfy d < 1 + r < u")
     return (1+r-d)/(u-d)
+
     
 def maturity_prices(S0, u , d, N):
     """
@@ -32,3 +34,47 @@ def maturity_prices(S0, u , d, N):
     """
     k = np.arange(N+1)
     return S0 * u**k * d**(N - k)
+
+
+def call_payoff(S, K):
+    """
+    The payoff function for a European call is max(S_N - K, 0).
+    
+    Parameters:
+    S = stock prices at maturity (numpy.ndarray)
+    K = strike price (float)
+    """
+    return np.maximum(S - K, 0)
+
+
+def put_payoff(S, K):
+    """
+    The payoff function for a European put is max(K - S_N, 0)
+
+    Parameters:
+    S = stock prices at maturity (numpy.ndarray)
+    K = strike price (float)
+    """
+    return np.maximum(K - S, 0)
+
+
+def binary_call_payoff(S, K):
+    """
+    The payoff function for a binary call is I(S_N >= K) where I is the indicator function
+
+    Parameters:
+    S = stock prices at maturity (numpy.ndarray)
+    K = strike price (float)
+    """
+    return np.where(S >= K, 1.0, 0.0)
+
+
+def binary_put_payoff(S, K):
+    """
+    The payoff function for a binary put is I(S_N <= K) where I is the indicator function
+
+    Parameters:
+    S = stock prices at maturity (numpy.ndarray)
+    K = strike price (float)
+    """
+    return np.where(S <= K, 1.0, 0.0)
