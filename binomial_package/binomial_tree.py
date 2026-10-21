@@ -1,6 +1,10 @@
-"""
-Module for path-independent option pricing using the N-period binomial model
-"""
+###
+## Binomial Model for Option Pricing
+###
+
+
+## This is a module for path-independent option pricing using the N-period binomial model
+
 import numpy as np
 
 
@@ -117,8 +121,10 @@ def estim_parameters(prices):
     u: the average factor for 'up days'
     d: the average factor for 'down days'
     p: the proportion of up days 
+
+    The input 'prices' is the dataset of closing prices (must be oldest to newest).
     """
-    ratios = prices[1:] / prices [:-1]
+    ratios = prices[1:] / prices [:-1] # sliced array including everything but the first entry, divded by a sliced array including everything but the last entry
 
     up_days = ratios > 1
     down_days = ~up_days

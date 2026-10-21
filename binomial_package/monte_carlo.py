@@ -21,13 +21,13 @@ def simulate_paths(S0, u, d, r, N, n_paths, seed=None):
     q = risk_neutral_prob(u, d, r)
     rng = np.random.default_rng(seed)
 
-    ups = rng.random((n_paths, N)) < q  # turns the table of unif(0,1) into true/ false coin tosses with P(up) = q
+    ups = rng.random((n_paths, N)) < q  # turns the table of unif(0,1) into true (heads) or false (tails), where P(up) = q
 
-    factors = np.where(ups, u, d) # turns true into u and falses in to d, so we know if its an up move or a down move along each path step
+    factors = np.where(ups, u, d) # turns trues into what u is and falses in to what d is, so we get the factor to multply by for each path step
 
     paths = S0 * np.cumprod(factors, axis = 1) # gives us the cumulative price of the stock for each path
 
-    initial = np.full((n_paths,1), S0)
+    initial = np.full((n_paths,1), S0) # fills a matrix with each entry set to what S0 is (our initial stock value)
 
     return np.concatenate((initial, paths), axis = 1)
 
