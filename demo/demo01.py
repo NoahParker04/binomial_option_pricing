@@ -1,12 +1,12 @@
 ### Demo 01
 
 """
-Checks the package against worked examples from the MA52100 notes, found in data/MA52100_examples.csv. 
+This demo checks the package against worked examples from the MA52100 notes, found in data/MA52100_examples.csv. 
 Each example is priced with the method in its 'method' column, and compared with the answer from the notes.
 Path-independent methods use the binomial tree module, whereas path-dependent methods use the monte carlo module.
 
 This demo can be used from the projects root folder with:
-    python demo/demo01.py
+    python -m demo.demo01
 """
 
 from binomial_package import option_price, call_payoff, put_payoff, binary_call_payoff, simulate_paths, asian_call_payoff, mc_price
@@ -20,7 +20,7 @@ payoffs = {
 
 n_paths = 100000
 
-print(f"{'Example':<8} {'Option':<12} {'Method':<6} {'Notes':>10} {'Package':>12}")
+print(f"{'Example':<8} {'Option':<12} {'Method':<6} {'Lec Notes':>10} {'Package':>12}")
 
 with open("data/MA52100_examples.csv", "r") as f:
     f.readline()

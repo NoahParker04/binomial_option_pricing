@@ -3,7 +3,7 @@
 ###
 
 ## FTAP: C = (1+r)^-N * E[C_N]
-## We can't calculate the expected payoff of a path-dependent option, such as an Asian call option, so we use a Monte Carlo approximation:
+## Its not as simple to calculate the expected payoff of a path-dependent option, such as an Asian call option, so we use a Monte Carlo approximation:
 ## 1. Simulate many price paths, with up-moves happening with probability q
 ## 2. Compute each paths payoff
 ## 3. Average the payoffs and discount by (1+r)^-N
