@@ -107,3 +107,25 @@ def option_price(S0, K, u, d, r, N, payoff):
         down = V[:-1] # copy of V without its last entry
         V = (q * up + (1 - q) * down) / (1 + r)
     return V[0]
+
+
+def estim_parameters(prices):
+    """
+    Since real data doesnt go up or down by deterministic factors, we must estimate the parameters in our binomial model.
+
+    To do this simply, we return:
+    u: the average factor for 'up days'
+    d: the average factor for 'down days'
+    p: the proportion of up days 
+    """
+    ratios = prices[1:] / prices [:-1]
+
+    up_days = ratios > 1
+    down_days = ~up_days
+
+    u = np.mean(ratios[up_days])
+    d = np.mean(ratios[down_days])
+
+    p = np.mean(up_days)
+
+    return u, d, p

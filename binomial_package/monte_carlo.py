@@ -47,15 +47,13 @@ def mc_price(payoffs, r , N):
     """
     Monte carlo estimate of the no-arbitrage price according to the FTAP, using the average of simulated payoffs.
 
-    Returns the estimated price and its standard error
+    Returns the estimated price.
     """
     discount = (1 + r)**(-N)
 
     price = discount * np.mean(payoffs)
 
-    std_error = discount * np.std(payoffs, ddof=1) / np.sqrt(len(payoffs))
-
-    return price, std_error
+    return price
 
 
     
