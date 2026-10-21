@@ -1,5 +1,5 @@
-example,option,method,S0,K,u,d,r,N,barrier,answer
-Ex5.2,call,tree,100,118,1.4,0.7,0.1,1,,11.428571
-Ex5.10,call,tree,2025,1800,1.3333333333,0.8333333333,0.25,2,,880
-Ex6.14,binary_call,tree,1,1.5,2,0.5,0.25,4,,0.128
-Ex6.15,asian_call,mc,1,1,2,0.5,0.25,3,,0.304
+example,option,method,S0,K,u,d,r,N,answer
+Ex5.2,call,tree,100,118,1.4,0.7,0.1,1,11.428571
+Ex5.10,call,tree,2025,1800,1.3333333333,0.8333333333,0.25,2,880
+Ex6.14,binary_call,tree,1,1.5,2,0.5,0.25,4,0.128
+Ex6.15,asian_call,mc,1,1,2,0.5,0.25,3,0.304
